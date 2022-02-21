@@ -47,8 +47,8 @@ public struct WeakReferenceBreakRetainCycleBetweenObjectsExample {
     }
     
     public static func run() {
-        let pilot = Pilot(name: "pilot")
-        let f1Car = F1Car(model: "f1Car")
+        let pilot = Pilot(name: "Alonso")
+        let f1Car = F1Car(model: "R2022")
         
         let f1CarWeakReference = WeakReference(f1Car)
         

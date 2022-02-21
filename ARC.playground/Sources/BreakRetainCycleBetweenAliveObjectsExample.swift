@@ -1,15 +1,15 @@
 import Foundation
 
-/// An example with a situation where one property that’s allowed to be nil and another property that can’t be nil have the potential to cause a strong reference cycle
-/// (this scenario is best resolved with an unowned reference)
+/// An example in which both properties should always have a value, and neither property should ever be nil once initialization is complete
 
-public struct BreakRetainCycleBetweenPotentialNilAndAlwaysAliveObjectsExample {
+public struct BreakRetainCycleBetweenAliveObjectsExample {
     
     class Pilot {
         let name: String
-        var f1Car: F1Car?
-        init(name: String) {
+        var f1Car: F1Car!
+        init(name: String, f1CarModel: String) {
             self.name = name
+            self.f1Car = F1Car(model: f1CarModel, pilot: self)
         }
         deinit {
             print("\(#function): \(name)")
@@ -29,8 +29,6 @@ public struct BreakRetainCycleBetweenPotentialNilAndAlwaysAliveObjectsExample {
     }
     
     public static func run() {
-        let pilot = Pilot(name: "Alonso")
-        let f1Car = F1Car(model: "R2022", pilot: pilot)
-        pilot.f1Car = f1Car
+        let _ = Pilot(name: "Alonso", f1CarModel: "R2022")
     }
 }

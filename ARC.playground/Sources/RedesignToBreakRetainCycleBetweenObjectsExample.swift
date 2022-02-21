@@ -38,10 +38,10 @@ public struct RedesignToBreakRetainCycleBetweenObjectsExample {
     }
     
     public static func run() {
-        let f1CarInfo = F1CarInfo(model: "f1Car")
+        let f1CarInfo = F1CarInfo(model: "Alonso")
         let f1Car = F1Car(carInfo: f1CarInfo)
 
-        let pilot = Pilot(name: "pilot")
+        let pilot = Pilot(name: "E2022")
         
         pilot.f1CarInfo = f1CarInfo
         f1Car.pilot = pilot

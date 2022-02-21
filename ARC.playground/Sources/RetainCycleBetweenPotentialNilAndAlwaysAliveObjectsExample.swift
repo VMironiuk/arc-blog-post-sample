@@ -28,8 +28,8 @@ public struct RetainCycleBetweenPotentialNilAndAlwaysAliveObjectsExample {
     }
     
     public static func run() {
-        let pilot = Pilot(name: "pilot")
-        let f1Car = F1Car(model: "f1Car", pilot: pilot)
+        let pilot = Pilot(name: "Alonso")
+        let f1Car = F1Car(model: "R2022", pilot: pilot)
         pilot.f1Car = f1Car
     }
 }
