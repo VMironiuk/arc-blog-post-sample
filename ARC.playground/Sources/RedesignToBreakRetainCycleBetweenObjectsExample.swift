@@ -12,10 +12,10 @@ public struct RedesignToBreakRetainCycleBetweenObjectsExample {
             self.name = name
         }
         deinit {
-            print("\(#function): \(name)")
+            print("\(#function) (\(Pilot.self): \(name)")
         }
         func info() -> String {
-            "\(name) drives \(f1CarInfo!.model)"
+            "\(name) drives \(f1CarInfo?.model ?? "none")"
         }
     }
     
@@ -23,6 +23,9 @@ public struct RedesignToBreakRetainCycleBetweenObjectsExample {
         let model: String
         init(model: String) {
             self.model = model
+        }
+        deinit {
+            print("\(#function) (\(F1CarInfo.self)): \(model)")
         }
     }
     
@@ -33,15 +36,15 @@ public struct RedesignToBreakRetainCycleBetweenObjectsExample {
             self.carInfo = carInfo
         }
         deinit {
-            print("\(#function): \(carInfo.model)")
+            print("\(#function) (\(F1Car.self)): \(carInfo.model)")
         }
     }
     
     public static func run() {
-        let f1CarInfo = F1CarInfo(model: "Alonso")
+        let f1CarInfo = F1CarInfo(model: "R2022")
         let f1Car = F1Car(carInfo: f1CarInfo)
 
-        let pilot = Pilot(name: "E2022")
+        let pilot = Pilot(name: "Alonso")
         
         pilot.f1CarInfo = f1CarInfo
         f1Car.pilot = pilot

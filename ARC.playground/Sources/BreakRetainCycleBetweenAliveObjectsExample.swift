@@ -14,6 +14,9 @@ public struct BreakRetainCycleBetweenAliveObjectsExample {
         deinit {
             print("\(#function): \(name)")
         }
+        func info() {
+            print("\(name) drives \(f1Car.model)")
+        }
     }
     
     class F1Car {
@@ -26,9 +29,14 @@ public struct BreakRetainCycleBetweenAliveObjectsExample {
         deinit {
             print("\(#function): \(model)")
         }
+        func info() {
+            print("\(model) is driven by \(pilot.name)")
+        }
     }
     
     public static func run() {
-        let _ = Pilot(name: "Alonso", f1CarModel: "R2022")
+        let pilot = Pilot(name: "Alonso", f1CarModel: "R2022")
+        pilot.info()
+        pilot.f1Car.info()
     }
 }

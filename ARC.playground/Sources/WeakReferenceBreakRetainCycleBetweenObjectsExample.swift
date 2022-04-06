@@ -12,6 +12,9 @@ class WeakReference<T: AnyObject> {
     init(_ object: T) {
         self.object = object
     }
+    deinit {
+        print("\(#function) (\(WeakReference.self)): \(String(describing: object.self))")
+    }
 }
 
 extension WeakReference: F1CarProtocol where T: F1CarProtocol {
@@ -31,7 +34,10 @@ public struct WeakReferenceBreakRetainCycleBetweenObjectsExample {
             self.name = name
         }
         deinit {
-            print("\(#function): \(name)")
+            print("\(#function) (\(Pilot.self)): \(name)")
+        }
+        func info() {
+            print("\(name) drives the \(f1Car?.model ?? "none")")
         }
     }
     
@@ -42,7 +48,10 @@ public struct WeakReferenceBreakRetainCycleBetweenObjectsExample {
             self.model = model
         }
         deinit {
-            print("\(#function): \(model)")
+            print("\(#function) (\(F1Car.self)): \(model)")
+        }
+        func info() {
+            print("\(model) is driven by \(pilot?.name ?? "none")")
         }
     }
     
@@ -54,5 +63,7 @@ public struct WeakReferenceBreakRetainCycleBetweenObjectsExample {
         
         pilot.f1Car = f1CarWeakReference
         f1Car.pilot = pilot
+        f1Car.info()
+        pilot.info()
     }
 }

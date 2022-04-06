@@ -1,3 +1,3 @@
 import Cocoa
 
-AccessingWeakObjectThroughWithExtendedLifetimeExample.run()
+RetainCycleWithClosureExample.run()
